@@ -21,7 +21,6 @@ const Sales = () => {
   const [selectedPeriod, setSelectedPeriod] = useState('30days');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [sortBy, setSortBy] = useState('date');
-  const [viewMode, setViewMode] = useState('table');
 
   const salesStats = [
     { 

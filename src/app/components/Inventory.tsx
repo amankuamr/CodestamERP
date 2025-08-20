@@ -11,7 +11,6 @@ import {
 } from './Icons';
 
 const Inventory = () => {
-  const [activeTab, setActiveTab] = useState('overview');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('name');
