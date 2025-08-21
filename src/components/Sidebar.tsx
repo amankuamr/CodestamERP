@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { 
   DashboardIcon, 
@@ -16,8 +16,7 @@ import {
   OrderIcon,
   PaymentIcon,
   WarningIcon,
-  UserIcon,
-  ThemeIcon
+  UserIcon
 } from './Icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -100,7 +99,8 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
     window.addEventListener('mousedown', onClick);
     return () => window.removeEventListener('mousedown', onClick);
   }, [toolMenu]);
-  const [customTools, setCustomTools] = useState([
+  
+  const [customTools] = useState([
     {
       id: 'hub-track-pro',
       name: 'Hub track pro',
@@ -347,20 +347,6 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
     }
   };
 
-  const generateRandomColor = () => {
-    const colors = [
-      'from-blue-500 to-cyan-500',
-      'from-purple-500 to-pink-500',
-      'from-green-500 to-teal-500',
-      'from-orange-500 to-red-500',
-      'from-indigo-500 to-purple-500',
-      'from-pink-500 to-rose-500',
-      'from-teal-500 to-green-500',
-      'from-yellow-500 to-orange-500'
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
-
   const handleAddTool = () => {
     const tool = availableTools.find((item) => item.id === selectedToolId);
     if (tool && !menuItems.some(item => item.id === tool.id)) {
@@ -378,8 +364,6 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
       setShowAddToolModal(false);
     }
   };
-
-  // No key press needed for select
 
   return (
     <>
@@ -512,7 +496,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
                                 <div className="w-2 h-2 bg-blue-500 rounded-full ml-2"></div>
                               )}
                             </div>
-                            <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                            <p className="text-sm text-gray-600 mt-1 overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
                               {notification.message}
                             </p>
                             <p className="text-xs text-gray-500 mt-2">{notification.time}</p>
@@ -586,7 +570,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
                     {isCustom && (
                       <div
                         className="ml-1 mr-2"
-                        ref={el => (buttonRefs.current[item.id] = el)}
+                        ref={el => { buttonRefs.current[item.id] = el; }}
                       >
                         <button
                           tabIndex={0}
@@ -840,7 +824,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
                                   <div className="w-2 h-2 bg-blue-500 rounded-full ml-1"></div>
                                 )}
                               </div>
-                              <p className="text-xs text-gray-600 mt-1 line-clamp-2">
+                              <p className="text-xs text-gray-600 mt-1 overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
                                 {notification.message}
                               </p>
                               <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
@@ -997,7 +981,6 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
               className="w-full mb-3 py-2 bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold rounded transition-colors shadow"
             >
               Connect your domain
-            
             </button>
           </div>
           
@@ -1076,7 +1059,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
           </div>
         </div>
       )}
-    {toolMenu && toolMenuPosition && createPortal(
+      {toolMenu && toolMenuPosition && createPortal(
         <div
           id="overlay-tool-dropdown"
           className="fixed z-[9999] w-40 bg-white rounded shadow border border-gray-200 py-1"
