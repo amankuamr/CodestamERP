@@ -9,10 +9,20 @@ import Suppliers from '@/components/Suppliers';
 import Sales from '@/components/Sales';
 import AIInsights from '@/components/AIInsights';
 import HubTrackPro from '@/components/HubTrackPro';
+import RightStickyPanel from '@/components/RightStickyPanel';
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeView, setActiveView] = useState('dashboard');
+
+  const handleSettingsClick = () => {
+    setActiveView('settings');
+  };
+
+  const handleThemeToggle = () => {
+    // Theme toggle logic can be implemented here
+    console.log('Theme toggled');
+  };
 
   const renderActiveView = () => {
     switch (activeView) {
@@ -101,6 +111,12 @@ export default function Home() {
           {renderActiveView()}
         </main>
       </div>
+
+      {/* Right Sticky Panel */}
+      <RightStickyPanel 
+        onSettingsClick={handleSettingsClick}
+        onThemeToggle={handleThemeToggle}
+      />
 
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (

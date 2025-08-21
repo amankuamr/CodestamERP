@@ -19,6 +19,8 @@ import {
   UserIcon,
   ThemeIcon
 } from './Icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWhatsapp, faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -116,6 +118,48 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
       name: 'GAMA',
       icon: 'G',
       color: 'from-green-500 to-teal-500'
+    },
+    {
+      id: 'alpha-tool-custom',
+      name: 'Alpha Tool',
+      icon: 'A',
+      color: 'from-blue-500 to-cyan-500'
+    },
+    {
+      id: 'beta-tool',
+      name: 'Beta Tool',
+      icon: 'B',
+      color: 'from-yellow-500 to-orange-500'
+    },
+    {
+      id: 'gamma-tool',
+      name: 'Gamma Tool',
+      icon: 'G',
+      color: 'from-indigo-500 to-purple-500'
+    },
+    {
+      id: 'delta-tool',
+      name: 'Delta Tool',
+      icon: 'D',
+      color: 'from-pink-500 to-rose-500'
+    },
+    {
+      id: 'epsilon-tool',
+      name: 'Epsilon Tool',
+      icon: 'E',
+      color: 'from-teal-500 to-green-500'
+    },
+    {
+      id: 'zeta-tool',
+      name: 'Zeta Tool',
+      icon: 'Z',
+      color: 'from-red-500 to-pink-500'
+    },
+    {
+      id: 'theta-tool',
+      name: 'Theta Tool',
+      icon: 'T',
+      color: 'from-cyan-500 to-blue-500'
     }
   ]);
   const notificationRef = useRef<HTMLDivElement>(null);
@@ -579,12 +623,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
                 onClick={() => setShowMyTools(!showMyTools)}
                 className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors rounded-lg"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-5 h-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">T</span>
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider">My Tools</span>
-                </div>
+                <span className="text-xs font-semibold text-white/60 uppercase tracking-wider">My Tools</span>
                 <svg 
                   className={`w-4 h-4 transition-transform ${showMyTools ? 'rotate-180' : ''}`} 
                   fill="none" 
@@ -596,7 +635,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
               </button>
               
               {showMyTools && (
-                <div className="mt-2 space-y-1 pl-4">
+                <div className="mt-2 pl-4 h-24 overflow-y-auto space-y-1 pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
                   {customTools.map((tool) => (
                     <button
                       key={tool.id}
@@ -620,6 +659,23 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
             </div>
           </nav>
 
+          {/* WhatsApp & Gmail Buttons (Horizontal) */}
+          <div className="px-4 pt-3 flex flex-row space-x-2" style={{ backgroundColor: '#1e2155' }}>
+            <button
+              onClick={() => window.open('https://wa.me/', '_blank')}
+              className="flex-1 py-2 bg-green-500 hover:bg-green-700 text-white text-lg font-semibold rounded transition-colors flex items-center justify-center"
+              aria-label="WhatsApp"
+            >
+              <FontAwesomeIcon icon={faWhatsapp} />
+            </button>
+            <button
+              onClick={() => window.open('mailto:', '_blank')}
+              className="flex-1 py-2 bg-red-500 hover:bg-red-700 text-white text-lg font-semibold rounded transition-colors flex items-center justify-center"
+              aria-label="Gmail"
+            >
+              <FontAwesomeIcon icon={faGoogle} />
+            </button>
+          </div>
           {/* Connect Your Domain Button */}
           <div className="px-4 pt-3" style={{ backgroundColor: '#1e2155' }}>
             <button
@@ -629,29 +685,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
               Connect your domain
             </button>
           </div>
-          {/* Settings and Theme Icons */}
-          <div className="px-4 py-3 border-t border-white/20" style={{ backgroundColor: '#1e2155' }}>
-            <div className="flex items-center justify-center space-x-4">
-              <button
-                onClick={() => onViewChange('settings')}
-                className={`p-2 rounded-lg transition-colors ${
-                  activeView === 'settings'
-                    ? 'bg-white/10 text-white'
-                    : 'text-white/80 hover:bg-white/5 hover:text-white'
-                }`}
-                title="Settings"
-              >
-                <SettingsIcon size={20} />
-              </button>
-              <button
-                className="p-2 rounded-lg text-white/80 hover:bg-white/5 hover:text-white transition-colors"
-                title="Toggle Theme"
-              >
-                <ThemeIcon size={20} />
-              </button>
-            </div>
-          </div>
-
+          
           {/* User Profile */}
           <div className="p-4 border-t border-white/20" style={{ backgroundColor: '#1e2155' }}>
             <div className="flex items-center space-x-3">
@@ -897,12 +931,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
                 onClick={() => setShowMyTools(!showMyTools)}
                 className="w-full flex items-center justify-between px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/5 hover:text-white transition-colors rounded-lg"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="w-5 h-5 bg-gradient-to-r from-blue-500 to-purple-500 rounded flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">T</span>
-                  </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider">My Tools</span>
-                </div>
+                <span className="text-xs font-semibold text-white/60 uppercase tracking-wider">My Tools</span>
                 <svg 
                   className={`w-4 h-4 transition-transform ${showMyTools ? 'rotate-180' : ''}`} 
                   fill="none" 
@@ -914,7 +943,7 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
               </button>
               
               {showMyTools && (
-                <div className="mt-2 space-y-1 pl-4">
+                <div className="mt-2 pl-4 h-24 overflow-y-auto space-y-1 pr-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
                   {customTools.map((tool) => (
                     <button
                       key={tool.id}
@@ -941,6 +970,23 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
             </div>
           </nav>
 
+          {/* WhatsApp & Gmail Buttons - Mobile (Horizontal) */}
+          <div className="px-4 pt-3 flex flex-row space-x-2" style={{ backgroundColor: '#1e2155' }}>
+            <button
+              onClick={() => window.open('https://wa.me/', '_blank')}
+              className="flex-1 py-2 bg-green-500 hover:bg-green-700 text-white text-lg font-semibold rounded transition-colors flex items-center justify-center"
+              aria-label="WhatsApp"
+            >
+              <FontAwesomeIcon icon={faWhatsapp} />
+            </button>
+            <button
+              onClick={() => window.open('mailto:', '_blank')}
+              className="flex-1 py-2 bg-red-500 hover:bg-red-700 text-white text-lg font-semibold rounded transition-colors flex items-center justify-center"
+              aria-label="Gmail"
+            >
+              <FontAwesomeIcon icon={faGoogle} />
+            </button>
+          </div>
           {/* Connect Your Domain Button - Mobile */}
           <div className="px-4 pt-3" style={{ backgroundColor: '#1e2155' }}>
             <button
@@ -951,34 +997,10 @@ const Sidebar = ({ isOpen, onClose, activeView, onViewChange }: SidebarProps) =>
               className="w-full mb-3 py-2 bg-blue-500 hover:bg-blue-700 text-white text-sm font-semibold rounded transition-colors shadow"
             >
               Connect your domain
+            
             </button>
           </div>
-          {/* Settings and Theme Icons */}
-          <div className="px-4 py-3 border-t border-white/20" style={{ backgroundColor: '#1e2155' }}>
-            <div className="flex items-center justify-center space-x-4">
-              <button
-                onClick={() => {
-                  onViewChange('settings');
-                  onClose();
-                }}
-                className={`p-2 rounded-lg transition-colors ${
-                  activeView === 'settings'
-                    ? 'bg-white/10 text-white'
-                    : 'text-white/80 hover:bg-white/5 hover:text-white'
-                }`}
-                title="Settings"
-              >
-                <SettingsIcon size={20} />
-              </button>
-              <button
-                className="p-2 rounded-lg text-white/80 hover:bg-white/5 hover:text-white transition-colors"
-                title="Toggle Theme"
-              >
-                <ThemeIcon size={20} />
-              </button>
-            </div>
-          </div>
-
+          
           {/* User Profile */}
           <div className="p-4 border-t border-white/20" style={{ backgroundColor: '#1e2155' }}>
             <div className="flex items-center space-x-3">
